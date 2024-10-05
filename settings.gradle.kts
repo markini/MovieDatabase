@@ -21,7 +21,9 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Movie Database"
+rootProject.name = "MovieDatabase"
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 include(":app")
 

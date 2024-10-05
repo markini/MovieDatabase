@@ -41,7 +41,7 @@ class MainActivityViewModel @Inject constructor(
             when {
                 !isDatabaseInitialized -> MainActivityUiState.Loading
                 else -> MainActivityUiState.Success(
-                    isLoggedIn = isUserLogged,
+                    isUserLoggedIn = isUserLogged,
                 )
             }
         }.debounce(
@@ -80,7 +80,7 @@ class MainActivityViewModel @Inject constructor(
     sealed interface MainActivityUiState {
         data object Loading : MainActivityUiState
         data class Success(
-            val isLoggedIn: Boolean,
+            val isUserLoggedIn: Boolean,
         ) : MainActivityUiState
     }
 }

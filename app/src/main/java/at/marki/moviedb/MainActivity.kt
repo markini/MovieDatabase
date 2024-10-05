@@ -5,6 +5,9 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import at.marki.moviedb.MainActivityViewModel.MainActivityUiState
+import at.marki.moviedb.core.designsystems.components.LoadingState
 import at.marki.moviedb.core.designsystems.theme.MovieDatabaseTheme
 import at.marki.moviedb.ui.MovieDbApp
 import at.marki.moviedb.ui.rememberMovieDbAppState
@@ -25,11 +28,16 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             MovieDatabaseTheme {
+
                 val movieDbAppState = rememberMovieDbAppState()
 
-                MovieDbApp(
-                    appState = movieDbAppState,
-                )
+                when (val uiState = viewModel.uiState.collectAsStateWithLifecycle().value) {
+                    is MainActivityUiState.Loading -> LoadingState()
+                    is MainActivityUiState.Success -> MovieDbApp(
+                        isUserLoggedIn = uiState.isUserLoggedIn,
+                        appState = movieDbAppState,
+                    )
+                }
             }
         }
     }

@@ -3,6 +3,7 @@ package at.marki.moviedb.core.datastore
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
+import at.marki.moviedb.core.common.utils.JsonUtils
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.firstOrNull
 import kotlinx.coroutines.flow.flowOf
@@ -23,13 +24,57 @@ class PreferencesDataSource @Inject constructor(
     fun lastAppVersion(): Flow<String?> =
         getPreferenceFlow(PreferenceItems.lastVersionItem.key)
 
-    suspend fun setUserLoggedIn(isUserLoggedIn: Boolean) = setPreference(
-        key = PreferenceItems.isUserLoggedIn.key,
-        value = isUserLoggedIn,
+    fun user() = getPreferenceFlow(PreferenceItems.user.key)
+        .map { value ->
+            when (value) {
+                null -> null
+                else -> JsonUtils.decodeJson(value) ?: PreferenceItems.user.defaultValue
+            }
+        }
+
+    suspend fun setUser(user: User) = setJsonPreference(PreferenceItems.user, user)
+
+    suspend fun removeUser() = userPreferences.edit { preferences ->
+        preferences[PreferenceItems.user.key] = ""
+    }
+
+    suspend fun setFavoriteIds(favoriteIds: List<Long>) = setJsonPreference(
+        jsonPreferenceItem = PreferenceItems.favoriteIdsItem,
+        value = favoriteIds.map { it.toString() },
     )
 
-    fun isUserLoggedIn(): Flow<Boolean> =
-        getBooleanPreferenceFlow(PreferenceItems.isUserLoggedIn)
+    suspend fun addFavoriteId(favoriteId: Long) {
+        try {
+            val favoriteIds = favoritesIds().toMutableList()
+            if (!favoriteIds.contains(favoriteId)) {
+                favoriteIds.add(favoriteId)
+            }
+            setFavoriteIds(favoriteIds)
+        } catch (exception: Exception) {
+            Timber.e(exception, "Could not add favorite Id: $favoriteId")
+        }
+    }
+
+    suspend fun removeFavoriteId(favoriteId: Long) {
+        try {
+            val favoriteIds = favoritesIds().toMutableList()
+            favoriteIds.remove(favoriteId)
+            setFavoriteIds(favoriteIds)
+        } catch (exception: Exception) {
+            Timber.e(exception, "Could not remove favorite Id: $favoriteId")
+        }
+    }
+
+    suspend fun favoritesIds() =
+        JsonUtils.decodeJson<List<String>>(getPreference(PreferenceItems.favoriteIdsItem.key))
+            ?.map { it.toLong() }
+            ?: PreferenceItems.favoriteIdsItem.defaultValue.map { it.toLong() }
+
+    fun favoriteIdsFlow() = getPreferenceFlow(PreferenceItems.favoriteIdsItem.key)
+        .map { favoritesIds ->
+            JsonUtils.decodeJson<List<String>>(favoritesIds)?.map { it.toLong() }
+                ?: PreferenceItems.favoriteIdsItem.defaultValue.map { it.toLong() }
+        }
 
     // Region Helper Functions
 

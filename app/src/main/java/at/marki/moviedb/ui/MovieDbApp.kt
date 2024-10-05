@@ -16,6 +16,7 @@ import at.marki.moviedb.navigation.MovieDbNavHost
 
 @Composable
 fun MovieDbApp(
+    isUserLoggedIn: Boolean,
     appState: MovieDbAppState,
 ) {
     CompositionLocalProvider(
@@ -32,6 +33,7 @@ fun MovieDbApp(
                         .fillMaxSize()
                 ) {
                     MovieDbNavHost(
+                        isUserLoggedIn = isUserLoggedIn,
                         appState = appState,
                         modifier = Modifier.fillMaxSize(),
                     )

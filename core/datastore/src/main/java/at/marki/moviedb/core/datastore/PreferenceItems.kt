@@ -1,26 +1,34 @@
 package at.marki.moviedb.core.datastore
 
 import androidx.datastore.preferences.core.Preferences
-import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 
 /**
  * Single source of truth of all user preference data store keys and default values
  */
 object PreferenceItems {
+
     // ---------------------------------------------------------------------------------------------
     // General Keys
     val lastVersionItem by lazy {
         StringPreferenceItem(key = stringPreferencesKey("key_last_app_version"), defaultValue = "")
     }
 
-    val isUserLoggedIn by lazy {
-        BooleanPreferenceItem(
-            key = booleanPreferencesKey("key_user_logged_in"),
-            defaultValue = false
+    val user by lazy {
+        createJsonPreferenceItem(
+            key = stringPreferencesKey("key_user"),
+            defaultValue = User("", ""),
         )
     }
 
+    // ---------------------------------------------------------------------------------------------
+    // Favorites Keys
+    val favoriteIdsItem by lazy {
+        createJsonPreferenceItem(
+            key = stringPreferencesKey("key_favorites"),
+            defaultValue = emptyList<String>()
+        )
+    }
 
     inline fun <reified T : Enum<T>> createEnumPreferenceItem(
         key: Preferences.Key<String>,

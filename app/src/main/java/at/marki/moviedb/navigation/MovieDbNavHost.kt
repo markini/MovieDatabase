@@ -10,6 +10,7 @@ import at.marki.moviedb.ui.MovieDbAppState
 
 @Composable
 fun MovieDbNavHost(
+    isUserLoggedIn: Boolean,
     appState: MovieDbAppState,
     modifier: Modifier = Modifier,
 ) {

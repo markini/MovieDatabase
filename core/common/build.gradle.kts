@@ -11,4 +11,6 @@ android {
 
 dependencies {
     api(platform(libs.androidx.compose.bom))
+
+    api(libs.kotlinx.serialization.json)
 }
