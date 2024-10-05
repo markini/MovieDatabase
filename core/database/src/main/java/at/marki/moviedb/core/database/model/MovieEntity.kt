@@ -12,60 +12,35 @@ data class MovieEntity(
     val id: Long,
 
     @ColumnInfo(name = "title")
-    val title: String,
+    val title: String?,
 
     @ColumnInfo(name = "rating")
-    val rating: Double,
+    val rating: Double?,
 
     @ColumnInfo(name = "revenue")
-    val revenue: Long,
+    val revenue: Long?,
 
     @ColumnInfo(name = "release_date")
-    val releaseDate: LocalDate,
+    val releaseDate: LocalDate?,
 
     @ColumnInfo(name = "poster_url")
-    val posterUrl: String,
+    val posterUrl: String?,
 
     @ColumnInfo(name = "runtime")
-    val runtime: Int,
+    val runtime: Int?,
 
     @ColumnInfo(name = "overview")
-    val overview: String,
+    val overview: String?,
 
     @ColumnInfo(name = "reviews")
-    val reviews: Int,
+    val reviews: Int?,
 
     @ColumnInfo(name = "budget")
-    val budget: Long,
+    val budget: Long?,
 
     @ColumnInfo(name = "language")
-    val language: String,
+    val language: String?,
 
     @ColumnInfo(name = "genres")
-    val genres: List<String>,
-
-    @ColumnInfo(name = "director")
-    val director: DirectorEntity,
-
-    @ColumnInfo(name = "cast")
-    val cast: List<CastEntity>
-)
-
-data class DirectorEntity(
-    @ColumnInfo(name = "name")
-    val name: String,
-
-    @ColumnInfo(name = "picture_url")
-    val pictureUrl: String
-)
-
-data class CastEntity(
-    @ColumnInfo(name = "name")
-    val name: String,
-
-    @ColumnInfo(name = "picture_url")
-    val pictureUrl: String,
-
-    @ColumnInfo(name = "character")
-    val character: String
+    val genres: String?,
 )

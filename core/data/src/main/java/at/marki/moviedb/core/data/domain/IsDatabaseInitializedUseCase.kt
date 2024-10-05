@@ -6,6 +6,8 @@ import javax.inject.Inject
 
 /**
  * Checks if we have any movies in the database
+ *
+ * @return true if we have any movies in the database (database is initialized)
  */
 class IsDatabaseInitializedUseCase @Inject constructor(
     private val movieDao: MovieDao,

@@ -20,8 +20,8 @@ class PreferencesDataSource @Inject constructor(
         value = lastAppVersion,
     )
 
-    suspend fun lastAppVersion(): String? =
-        getPreference(PreferenceItems.lastVersionItem.key)
+    fun lastAppVersion(): Flow<String?> =
+        getPreferenceFlow(PreferenceItems.lastVersionItem.key)
 
     suspend fun setUserLoggedIn(isUserLoggedIn: Boolean) = setPreference(
         key = PreferenceItems.isUserLoggedIn.key,

@@ -1,4 +1,4 @@
-package com.bergfex.mobile.weather.core.database
+package at.marki.moviedb.core.database
 
 import android.content.Context
 import androidx.room.Room

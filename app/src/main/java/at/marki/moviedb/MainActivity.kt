@@ -8,7 +8,9 @@ import androidx.activity.viewModels
 import at.marki.moviedb.core.designsystems.theme.MovieDatabaseTheme
 import at.marki.moviedb.ui.MovieDbApp
 import at.marki.moviedb.ui.rememberMovieDbAppState
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     private val viewModel: MainActivityViewModel by viewModels()
