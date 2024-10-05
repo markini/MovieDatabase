@@ -47,6 +47,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core:data"))
     implementation(project(":core:designsystems"))
     implementation(project(":core:localization"))
 

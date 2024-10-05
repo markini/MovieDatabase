@@ -9,7 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.CoroutineScope
 
 @Composable
-fun rememberWeatherAppState(
+fun rememberMovieDbAppState(
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     navController: NavHostController = rememberNavController(),
 ): MovieDbAppState {
