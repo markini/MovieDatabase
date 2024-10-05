@@ -23,6 +23,14 @@ class PreferencesDataSource @Inject constructor(
     suspend fun lastAppVersion(): String? =
         getPreference(PreferenceItems.lastVersionItem.key)
 
+    suspend fun setUserLoggedIn(isUserLoggedIn: Boolean) = setPreference(
+        key = PreferenceItems.isUserLoggedIn.key,
+        value = isUserLoggedIn,
+    )
+
+    fun isUserLoggedIn(): Flow<Boolean> =
+        getBooleanPreferenceFlow(PreferenceItems.isUserLoggedIn)
+
     // Region Helper Functions
 
     private suspend inline fun <reified T> setJsonPreference(

@@ -1,6 +1,7 @@
 package at.marki.moviedb.core.datastore
 
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 
 /**
@@ -12,6 +13,14 @@ object PreferenceItems {
     val lastVersionItem by lazy {
         StringPreferenceItem(key = stringPreferencesKey("key_last_app_version"), defaultValue = "")
     }
+
+    val isUserLoggedIn by lazy {
+        BooleanPreferenceItem(
+            key = booleanPreferencesKey("key_user_logged_in"),
+            defaultValue = false
+        )
+    }
+
 
     inline fun <reified T : Enum<T>> createEnumPreferenceItem(
         key: Preferences.Key<String>,
