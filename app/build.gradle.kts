@@ -50,6 +50,8 @@ dependencies {
     implementation(project(":core:designsystems"))
     implementation(project(":core:localization"))
 
+    implementation(project(":feature:signup"))
+
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
 
