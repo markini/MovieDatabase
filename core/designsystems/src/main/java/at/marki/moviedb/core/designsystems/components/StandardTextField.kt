@@ -19,7 +19,7 @@ import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import at.marki.moviedb.core.designsystems.ThemePreviews
-import at.marki.moviedb.core.designsystems.theme2.AppTheme
+import at.marki.moviedb.core.designsystems.theme.AppTheme
 
 /**
  * A default text field.
@@ -80,7 +80,7 @@ fun StandardTextField(
 private fun StandardTextFieldPreview() {
     AppTheme {
         Surface {
-            EmailTextField(
+            StandardTextField(
                 value = "Marki D Aniel",
                 label = "Name",
                 onTextChanged = { },

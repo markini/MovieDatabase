@@ -26,7 +26,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
 import at.marki.moviedb.core.designsystems.ThemePreviews
-import at.marki.moviedb.core.designsystems.theme2.AppTheme
+import at.marki.moviedb.core.designsystems.theme.AppTheme
 
 /**
  * A text field for submitting a password.

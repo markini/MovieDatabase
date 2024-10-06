@@ -11,7 +11,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import at.marki.moviedb.core.designsystems.ThemePreviews
 import at.marki.moviedb.core.designsystems.components.LoadingState
-import at.marki.moviedb.core.designsystems.theme2.AppTheme
+import at.marki.moviedb.core.designsystems.theme.AppTheme
 
 @Composable
 fun SignupRoute(
@@ -26,6 +26,7 @@ fun SignupRoute(
         onEmailChanged = viewModel::onMailChanged,
         onPasswordChanged = viewModel::onPasswordOneChanged,
         onPasswordTwoChanged = viewModel::onPasswordTwoChanged,
+        onSubmitClicked = viewModel::onSubmitClicked,
         modifier = modifier,
     )
 }
@@ -37,6 +38,7 @@ fun SignupScreen(
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
     onPasswordTwoChanged: (String) -> Unit,
+    onSubmitClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Box(
@@ -51,6 +53,7 @@ fun SignupScreen(
                 onEmailChanged = onEmailChanged,
                 onPasswordChanged = onPasswordChanged,
                 onPasswordTwoChanged = onPasswordTwoChanged,
+                onSubmitClicked = onSubmitClicked,
             )
         }
     }
@@ -63,6 +66,7 @@ private fun SuccessState(
     onEmailChanged: (String) -> Unit,
     onPasswordChanged: (String) -> Unit,
     onPasswordTwoChanged: (String) -> Unit,
+    onSubmitClicked: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     LazyColumn(
@@ -78,6 +82,7 @@ private fun SuccessState(
                 onEmailChanged = onEmailChanged,
                 onPasswordChanged = onPasswordChanged,
                 onPasswordTwoChanged = onPasswordTwoChanged,
+                onSubmitClicked = onSubmitClicked,
             )
         }
     }
@@ -101,6 +106,7 @@ fun SignupScreenPreview() {
                 onEmailChanged = {},
                 onPasswordChanged = {},
                 onPasswordTwoChanged = {},
+                onSubmitClicked = {},
             )
         }
     }
