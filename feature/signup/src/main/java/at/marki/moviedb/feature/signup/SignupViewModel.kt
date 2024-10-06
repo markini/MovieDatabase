@@ -51,7 +51,7 @@ class SignupViewModel @Inject constructor(
                 password = passwordOne,
                 passwordTwo = passwordTwo,
                 isSubmitEnabled = isSubmitEnabled,
-                isPasswordMatching = hasSubmitted && (passwordOne == passwordTwo),
+                isPasswordMatching = !hasSubmitted || (passwordOne == passwordTwo),
             )
         }.debounce(
             DEFAULT_DEBOUNCE_TIME,

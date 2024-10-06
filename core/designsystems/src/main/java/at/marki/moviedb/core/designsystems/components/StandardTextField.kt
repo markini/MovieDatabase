@@ -49,7 +49,7 @@ fun StandardTextField(
         label = {
             Text(
                 text = label,
-                color = Color.Gray,
+                color = Color.DarkGray,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
             )

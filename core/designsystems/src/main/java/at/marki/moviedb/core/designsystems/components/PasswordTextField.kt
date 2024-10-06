@@ -1,5 +1,7 @@
 package at.marki.moviedb.core.designsystems.components
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -9,6 +11,7 @@ import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Surface
@@ -25,6 +28,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.sp
 import at.marki.moviedb.core.designsystems.ThemePreviews
 import at.marki.moviedb.core.designsystems.theme.AppTheme
 
@@ -40,6 +44,7 @@ import at.marki.moviedb.core.designsystems.theme.AppTheme
 fun PasswordTextField(
     value: String,
     label: String,
+    isError: Boolean,
     onTextChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
     onDoneClicked: (() -> Unit)? = null,
@@ -48,56 +53,67 @@ fun PasswordTextField(
     var valueText by remember(value) { mutableStateOf(value) }
     var passwordVisible by remember { mutableStateOf(false) }
 
-    OutlinedTextField(
-        value = valueText,
-        onValueChange = { newValue ->
-            valueText = newValue
-            onTextChanged(valueText)
-        },
-        label = {
+    Column {
+        OutlinedTextField(
+            value = valueText,
+            onValueChange = { newValue ->
+                valueText = newValue
+                onTextChanged(valueText)
+            },
+            label = {
+                Text(
+                    text = label,
+                    color = Color.DarkGray,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1,
+                )
+            },
+            keyboardOptions = KeyboardOptions.Default.copy(
+                keyboardType = KeyboardType.Password,
+                imeAction = when (hasDoneAction) {
+                    true -> ImeAction.Done
+                    false -> ImeAction.None
+                },
+            ),
+            keyboardActions = KeyboardActions(
+                onDone = { onDoneClicked?.invoke() },
+            ),
+            visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
+            trailingIcon = {
+
+                val icon = when (passwordVisible) {
+                    true -> Icons.Default.Visibility
+                    else -> Icons.Default.VisibilityOff
+                }
+
+                IconButton(
+                    onClick = { passwordVisible = !passwordVisible },
+                ) {
+                    Icon(
+                        imageVector = icon,
+                        contentDescription = null,
+                    )
+                }
+            },
+            modifier = modifier.fillMaxWidth(),
+            colors = OutlinedTextFieldDefaults.colors().copy(
+                focusedTextColor = LocalContentColor.current,
+                unfocusedTextColor = LocalContentColor.current,
+                cursorColor = LocalContentColor.current,
+                unfocusedLabelColor = LocalContentColor.current,
+                errorTextColor = LocalContentColor.current,
+            ),
+        )
+        AnimatedVisibility(visible = isError) {
             Text(
-                text = label,
-                color = Color.Gray,
+                text = "Passwords don't match",
+                color = MaterialTheme.colorScheme.error,
+                fontSize = 12.sp,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
             )
-        },
-        keyboardOptions = KeyboardOptions.Default.copy(
-            keyboardType = KeyboardType.Password,
-            imeAction = when (hasDoneAction) {
-                true -> ImeAction.Done
-                false -> ImeAction.None
-            },
-        ),
-        keyboardActions = KeyboardActions(
-            onDone = { onDoneClicked?.invoke() },
-        ),
-        visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
-        trailingIcon = {
-
-            val icon = when (passwordVisible) {
-                true -> Icons.Default.Visibility
-                else -> Icons.Default.VisibilityOff
-            }
-
-            IconButton(
-                onClick = { passwordVisible = !passwordVisible },
-            ) {
-                Icon(
-                    imageVector = icon,
-                    contentDescription = null,
-                )
-            }
-        },
-        modifier = modifier.fillMaxWidth(),
-        colors = OutlinedTextFieldDefaults.colors().copy(
-            focusedTextColor = LocalContentColor.current,
-            unfocusedTextColor = LocalContentColor.current,
-            cursorColor = LocalContentColor.current,
-            unfocusedLabelColor = LocalContentColor.current,
-            errorTextColor = LocalContentColor.current,
-        ),
-    )
+        }
+    }
 }
 
 @ThemePreviews
@@ -108,6 +124,22 @@ private fun PasswordTextFieldPreview() {
             PasswordTextField(
                 value = "password",
                 label = "Password",
+                isError = false,
+                onTextChanged = { },
+            )
+        }
+    }
+}
+
+@ThemePreviews
+@Composable
+private fun PasswordTextFieldErrorPreview() {
+    AppTheme {
+        Surface {
+            PasswordTextField(
+                value = "password",
+                label = "Password",
+                isError = true,
                 onTextChanged = { },
             )
         }

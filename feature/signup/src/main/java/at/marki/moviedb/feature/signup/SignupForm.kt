@@ -47,12 +47,14 @@ fun SignupForm(
         PasswordTextField(
             value = uiState.password,
             label = "Password",
+            isError = false,
             onTextChanged = onPasswordChanged,
         )
         Spacer(modifier = Modifier.height(DEFAULT_FORM_SPACING.dp))
         PasswordTextField(
             value = uiState.passwordTwo,
-            label = "Password",
+            label = "Confirm Password",
+            isError = !uiState.isPasswordMatching,
             onTextChanged = onPasswordTwoChanged,
         )
         Spacer(modifier = Modifier.height((DEFAULT_FORM_SPACING * 2).dp))
