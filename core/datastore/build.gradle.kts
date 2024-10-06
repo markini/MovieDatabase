@@ -9,8 +9,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
-    //implementation(projects.core.model)
+    implementation(projects.core.common)
+    implementation(projects.core.model)
 
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.dataStore.core)

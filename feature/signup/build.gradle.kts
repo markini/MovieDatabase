@@ -9,6 +9,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:common"))
-    implementation(project(":core:designsystems"))
+    implementation(projects.core.common)
+    implementation(projects.core.designsystems)
 }

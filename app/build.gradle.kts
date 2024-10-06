@@ -47,11 +47,11 @@ android {
 }
 
 dependencies {
-    implementation(project(":core:data"))
-    implementation(project(":core:designsystems"))
-    implementation(project(":core:localization"))
+    implementation(projects.core.data)
+    implementation(projects.core.designsystems)
+    implementation(projects.core.localization)
 
-    implementation(project(":feature:signup"))
+    implementation(projects.feature.signup)
 
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.androidx.navigation.compose)
