@@ -8,7 +8,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import at.marki.moviedb.MainActivityViewModel.MainActivityUiState
 import at.marki.moviedb.core.designsystems.components.LoadingState
-import at.marki.moviedb.core.designsystems.theme.MovieDatabaseTheme
+import at.marki.moviedb.core.designsystems.theme2.AppTheme
 import at.marki.moviedb.ui.MovieDbApp
 import at.marki.moviedb.ui.rememberMovieDbAppState
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +27,7 @@ class MainActivity : ComponentActivity() {
         lifecycle.addObserver(viewModel)
 
         setContent {
-            MovieDatabaseTheme {
+            AppTheme {
 
                 val movieDbAppState = rememberMovieDbAppState()
 

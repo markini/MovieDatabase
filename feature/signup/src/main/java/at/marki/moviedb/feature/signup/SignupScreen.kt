@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import at.marki.moviedb.core.designsystems.ThemePreviews
 import at.marki.moviedb.core.designsystems.theme.MovieDatabaseTheme
+import at.marki.moviedb.core.designsystems.theme2.AppTheme
 
 @Composable
 fun SignupRoute(
@@ -36,7 +37,7 @@ fun SignupScreen(
 @Composable
 @ThemePreviews
 fun SignupScreenPreview() {
-    MovieDatabaseTheme {
+    AppTheme {
         Surface {
             SignupScreen()
         }
