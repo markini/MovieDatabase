@@ -5,6 +5,9 @@ import androidx.room.Relation
 import at.marki.moviedb.core.database.model.CastEntity
 import at.marki.moviedb.core.database.model.DirectorEntity
 import at.marki.moviedb.core.database.model.MovieEntity
+import at.marki.moviedb.core.database.model.toModel
+import at.marki.moviedb.core.database.model.toModels
+import at.marki.moviedb.core.model.Movie
 
 data class MovieWithCast(
     @Embedded
@@ -22,3 +25,9 @@ data class MovieWithCast(
     )
     val cast: List<CastEntity>,
 )
+
+fun MovieWithCast.toModel(): Movie {
+    val cast = cast.toModels()
+    val director = director.toModel()
+    return movieEntity.toModel(director, cast)
+}

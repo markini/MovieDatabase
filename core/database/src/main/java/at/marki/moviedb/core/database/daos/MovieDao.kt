@@ -22,6 +22,10 @@ interface MovieDao {
     suspend fun getMovieById(id: Long): MovieWithCast?
 
     @Transaction
+    @Query("SELECT * FROM movies WHERE id IN (:ids)")
+    fun getMoviesByIds(ids: List<Long>): Flow<List<MovieWithCast>>
+
+    @Transaction
     @Query("SELECT * FROM movies")
     fun getAllMovies(): Flow<List<MovieWithCast>>
 }
