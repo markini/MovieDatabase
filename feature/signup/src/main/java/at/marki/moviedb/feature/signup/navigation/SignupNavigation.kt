@@ -16,7 +16,6 @@ fun NavController.navigateToSignup(
 }
 
 fun NavGraphBuilder.signupScreen(
-    onNavigateToMovieDb: () -> Unit,
 ) {
     composable(route = SIGNUP_ROUTE) {
         SignupRoute()

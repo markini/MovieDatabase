@@ -51,6 +51,9 @@ dependencies {
     implementation(projects.core.designsystems)
     implementation(projects.core.localization)
 
+    implementation(projects.feature.details)
+    implementation(projects.feature.overview)
+    implementation(projects.feature.search)
     implementation(projects.feature.signup)
 
     implementation(libs.androidx.hilt.navigation.compose)

@@ -9,13 +9,11 @@ import at.marki.moviedb.feature.overview.OverviewRoute
 const val OVERVIEW_ROUTE = "overview"
 
 
-fun NavController.navigateToOverview(
-    navOptions: NavOptions? = null,
-) {
+fun NavController.navigateToOverview(navOptions: NavOptions? = null) {
     this.navigate(OVERVIEW_ROUTE, navOptions)
 }
 
-fun NavGraphBuilder.signupScreen(
+fun NavGraphBuilder.overviewScreen(
     onNavigateToMovieDb: () -> Unit,
 ) {
     composable(route = OVERVIEW_ROUTE) {

@@ -9,13 +9,13 @@ import at.marki.moviedb.feature.search.SearchRoute
 const val SEARCH_ROUTE = "search"
 
 
-fun NavController.navigateToOverview(
+fun NavController.navigateToSearch(
     navOptions: NavOptions? = null,
 ) {
     this.navigate(SEARCH_ROUTE, navOptions)
 }
 
-fun NavGraphBuilder.signupScreen(
+fun NavGraphBuilder.searchScreen(
     onNavigateToMovieDb: () -> Unit,
 ) {
     composable(route = SEARCH_ROUTE) {

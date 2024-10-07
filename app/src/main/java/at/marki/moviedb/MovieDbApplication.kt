@@ -11,6 +11,7 @@ import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import javax.inject.Inject
 
 @HiltAndroidApp
@@ -21,6 +22,7 @@ class MovieDbApplication : Application(), ImageLoaderFactory {
 
     override fun onCreate() {
         super.onCreate()
+        Timber.plant(Timber.DebugTree())
         CoroutineScope(Dispatchers.IO).launch {
             setLastAppVersion()
         }
