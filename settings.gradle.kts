@@ -35,4 +35,7 @@ include(":core:designsystems")
 include(":core:localization")
 include(":core:model")
 
+include(":feature:details")
+include(":feature:overview")
+include(":feature:search")
 include(":feature:signup")

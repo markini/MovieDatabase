@@ -91,6 +91,7 @@ zip4j = "2.7.0"
 androidxComposeMaterial3 = "1.2.1"
 kotlin1910 = "1.9.10"
 uiTooling = "1.6.8"
+junit = "1.2.1"
 
 [libraries]
 accompanist-permissions = { group = "com.google.accompanist", name = "accompanist-permissions", version.ref = "accompanist" }
@@ -230,6 +231,7 @@ kotlin-gradlePlugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-pl
 ksp-gradlePlugin = { group = "com.google.devtools.ksp", name = "com.google.devtools.ksp.gradle.plugin", version.ref = "ksp" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "androidxComposeMaterial3" }
 androidx-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling", version.ref = "uiTooling" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "androidGradlePlugin" }
@@ -249,3 +251,4 @@ moviedb-android-hilt = { id = "moviedb.android.hilt", version = "unspecified" }
 moviedb-android-library = { id = "moviedb.android.library", version = "unspecified" }
 moviedb-android-library-compose = { id = "moviedb.android.library.compose", version = "unspecified" }
 kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin1910" }
+android-library = { id = "com.android.library", version.ref = "androidGradlePlugin" }
