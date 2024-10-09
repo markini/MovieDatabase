@@ -5,8 +5,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Surface
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import at.marki.moviedb.core.designsystems.ThemePreviews
@@ -23,10 +25,15 @@ fun DetailsBottomSheet(
     viewModel: DetailsViewModel = hiltViewModel(),
 ) {
     viewModel.setMovieId(movieId)
+
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val uiStateValue = viewModel.uiState.collectAsStateWithLifecycle()
 
     ModalBottomSheet(
+        sheetState = sheetState,
+        modifier = modifier.fillMaxSize(),
         onDismissRequest = onDismissRequest,
+        scrimColor = Color.Transparent,
     ) {
         BottomSheetContent(
             uiState = uiStateValue.value,

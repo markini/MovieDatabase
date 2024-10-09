@@ -11,6 +11,7 @@ import at.marki.moviedb.feature.overview.navigation.OVERVIEW_ROUTE
 import at.marki.moviedb.feature.overview.navigation.navigateToOverview
 import at.marki.moviedb.feature.overview.navigation.overviewScreen
 import at.marki.moviedb.feature.signup.navigation.SIGNUP_ROUTE
+import at.marki.moviedb.feature.signup.navigation.navigateToSignup
 import at.marki.moviedb.feature.signup.navigation.signupScreen
 import at.marki.moviedb.ui.MovieDbAppState
 
@@ -24,7 +25,12 @@ fun MovieDbNavHost(
 
     NavigateToOverviewIfUserIsLoggedIn(
         isUserLoggedIn = isUserLoggedIn,
-        navController = navController
+        navController = navController,
+    )
+
+    NavigateToSignUpIfUserIsLoggedOut(
+        isUserLoggedIn = isUserLoggedIn,
+        navController = navController,
     )
 
     NavHost(
@@ -54,6 +60,24 @@ private fun NavigateToOverviewIfUserIsLoggedIn(
                 .build()
 
             navController.navigateToOverview(navOptions)
+        }
+    }
+}
+
+@Composable
+private fun NavigateToSignUpIfUserIsLoggedOut(
+    isUserLoggedIn: Boolean,
+    navController: NavController,
+) {
+    LaunchedEffect(isUserLoggedIn) {
+        if (!isUserLoggedIn) {
+            if (navController.currentDestination?.route != SIGNUP_ROUTE) {
+                val navOptions = NavOptions.Builder()
+                    .setPopUpTo(SIGNUP_ROUTE, true)
+                    .build()
+
+                navController.navigateToSignup(navOptions)
+            }
         }
     }
 }

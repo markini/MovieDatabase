@@ -1,11 +1,18 @@
 package at.marki.moviedb.feature.overview
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ExitToApp
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,6 +49,7 @@ fun OverviewRoute(
     OverviewScreen(
         uiState = uiState.value,
         onNavigateToSearch = onNavigateToSearch,
+        onLogout = { viewModel.logout() },
         onToggleFavorite = { movieId -> viewModel.toggleFavorite(movieId) },
         modifier = modifier,
     )
@@ -51,6 +59,7 @@ fun OverviewRoute(
 fun OverviewScreen(
     uiState: OverviewViewModelUiState,
     onNavigateToSearch: () -> Unit,
+    onLogout: () -> Unit,
     onToggleFavorite: (movieId: Long) -> Unit,
     modifier: Modifier = Modifier,
 ) {
@@ -71,6 +80,7 @@ fun OverviewScreen(
                     isDetailsBottomSheetVisible = true
                 },
                 onToggleFavorite = onToggleFavorite,
+                onLogout = onLogout,
             )
         }
     }
@@ -89,38 +99,55 @@ private fun SuccessState(
     onNavigateToSearch: () -> Unit,
     onOpenMovieDetails: (movieId: Long) -> Unit,
     onToggleFavorite: (movieId: Long) -> Unit,
+    onLogout: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    var isLogoutMenuVisible by remember { mutableStateOf(false) }
+
     LazyColumn(
         modifier = modifier.fillMaxSize(),
     ) {
         item {
-            OverviewAppBar(
-                user = uiState.user,
-                onSearchClick = onNavigateToSearch,
-                modifier = Modifier.padding(bottom = 40.dp)
-            )
-        }
-        if (uiState.favorites.isNotEmpty()) {
-            item {
-                Text(
-                    text = buildAnnotatedString {
-                        append("YOUR ")
-                        withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
-                            append("FAVORITES")
-                        }
+            Box(
+                modifier = Modifier.padding(bottom = 40.dp),
+            ) {
+                OverviewAppBar(
+                    user = uiState.user,
+                    onSearchClick = onNavigateToSearch,
+                    onUserClick = {
+                        isLogoutMenuVisible = true
                     },
-                    modifier = Modifier
-                        .padding(horizontal = LocalHorizontalContentPadding.current)
-                        .padding(bottom = 14.dp),
+                )
+                LogoutMenu(
+                    isVisible = isLogoutMenuVisible,
+                    onDismissRequest = { isLogoutMenuVisible = false },
+                    onLogout = {
+                        isLogoutMenuVisible = false
+                        onLogout()
+                    },
                 )
             }
-            item {
-                FavoritesComponent(
-                    favorites = uiState.favorites,
-                    onFavoriteClicked = onOpenMovieDetails,
-                    modifier = Modifier.padding(bottom = 30.dp),
-                )
+        }
+        item {
+            AnimatedVisibility(visible = uiState.favorites.isNotEmpty()) {
+                Column {
+                    Text(
+                        text = buildAnnotatedString {
+                            append("YOUR ")
+                            withStyle(style = SpanStyle(fontWeight = FontWeight.Bold)) {
+                                append("FAVORITES")
+                            }
+                        },
+                        modifier = Modifier
+                            .padding(horizontal = LocalHorizontalContentPadding.current)
+                            .padding(bottom = 14.dp),
+                    )
+                    FavoritesComponent(
+                        favorites = uiState.favorites,
+                        onFavoriteClicked = onOpenMovieDetails,
+                        modifier = Modifier.padding(bottom = 30.dp),
+                    )
+                }
             }
         }
         item {
@@ -157,6 +184,33 @@ private fun SuccessState(
     }
 }
 
+@Composable
+private fun LogoutMenu(
+    isVisible: Boolean,
+    onDismissRequest: () -> Unit,
+    onLogout: () -> Unit,
+    modifier: Modifier = Modifier,
+) {
+    DropdownMenu(
+        expanded = isVisible,
+        onDismissRequest = onDismissRequest,
+        modifier = modifier,
+    ) {
+        DropdownMenuItem(
+            text = { Text("Logout") },
+            onClick = {
+                onLogout()
+            },
+            leadingIcon = {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ExitToApp,
+                    contentDescription = null
+                )
+            }
+        )
+    }
+}
+
 
 @Composable
 @ThemePreviews
@@ -174,6 +228,7 @@ fun OverviewScreenPreview() {
                 ),
                 onNavigateToSearch = {},
                 onToggleFavorite = {},
+                onLogout = {},
             )
         }
     }

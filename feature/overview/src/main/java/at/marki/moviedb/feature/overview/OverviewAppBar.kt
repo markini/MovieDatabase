@@ -1,6 +1,7 @@
 package at.marki.moviedb.feature.overview
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -33,6 +34,7 @@ import at.marki.moviedb.core.designsystems.theme.AppTheme
 internal fun OverviewAppBar(
     user: User,
     onSearchClick: () -> Unit,
+    onUserClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     Row(
@@ -43,7 +45,9 @@ internal fun OverviewAppBar(
     ) {
         User(
             user = user,
-            modifier = Modifier.weight(1f)
+            modifier = Modifier
+                .weight(1f)
+                .clickable { onUserClick() },
         )
 
         IconButton(
@@ -114,6 +118,7 @@ private fun SettingsScreenPreview() {
             OverviewAppBar(
                 user = User(name = "Markus", email = ""),
                 onSearchClick = {},
+                onUserClick = {},
             )
         }
     }

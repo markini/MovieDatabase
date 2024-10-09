@@ -18,7 +18,7 @@ class UserRepository @Inject constructor(
     }
 
     fun isUserLoggedIn(): Flow<Boolean> {
-        return preferencesDataSource.user().map { it != null }
+        return preferencesDataSource.user().map { it != null && it.email.isNotEmpty() }
     }
 
     fun getUser(): Flow<User?> {

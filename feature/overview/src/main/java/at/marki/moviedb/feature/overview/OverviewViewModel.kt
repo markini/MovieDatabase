@@ -61,6 +61,13 @@ class OverviewViewModel @Inject constructor(
             favoritesRepository.toggleFavoriteId(id = movieId)
         }
     }
+
+    fun logout() {
+        viewModelScope.launch {
+            userRepository.clearUser()
+            favoritesRepository.setFavoriteIds(emptyList())
+        }
+    }
 }
 
 sealed interface OverviewViewModelUiState {

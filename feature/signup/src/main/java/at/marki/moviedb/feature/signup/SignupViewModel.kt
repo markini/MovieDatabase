@@ -78,6 +78,8 @@ class SignupViewModel @Inject constructor(
     }
 
     fun onSubmitClicked() {
+        if ((uiState.value as? SignupViewModelUiState.Success)?.isSubmitEnabled == false) return
+
         hasSubmittedState.value = true
         if (passwordOneState.value != passwordTwoState.value) return
 

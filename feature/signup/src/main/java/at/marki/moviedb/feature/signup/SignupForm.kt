@@ -42,6 +42,7 @@ fun SignupForm(
             value = uiState.mail,
             label = "Email",
             onTextChanged = onEmailChanged,
+            onDoneClicked = onSubmitClicked,
         )
         Spacer(modifier = Modifier.height(DEFAULT_FORM_SPACING.dp))
         PasswordTextField(
@@ -49,6 +50,7 @@ fun SignupForm(
             label = "Password",
             isError = false,
             onTextChanged = onPasswordChanged,
+            onDoneClicked = onSubmitClicked,
         )
         Spacer(modifier = Modifier.height(DEFAULT_FORM_SPACING.dp))
         PasswordTextField(
@@ -56,6 +58,7 @@ fun SignupForm(
             label = "Confirm Password",
             isError = !uiState.isPasswordMatching,
             onTextChanged = onPasswordTwoChanged,
+            onDoneClicked = onSubmitClicked,
         )
         Spacer(modifier = Modifier.height((DEFAULT_FORM_SPACING * 2).dp))
         SubmitButton(
