@@ -8,6 +8,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import at.marki.moviedb.core.data.model.SearchResult
 import at.marki.moviedb.core.designsystems.ThemePreviews
 import at.marki.moviedb.core.designsystems.components.LoadingState
 import at.marki.moviedb.core.designsystems.theme.AppTheme
@@ -48,7 +49,6 @@ private fun SuccessState(
     uiState: SearchViewModelUiState.Success,
     modifier: Modifier = Modifier,
 ) {
-
 }
 
 
@@ -59,7 +59,8 @@ fun SearchScreenPreview() {
         Surface {
             SearchScreen(
                 uiState = SearchViewModelUiState.Success(
-                    name = "",
+                    allMovies = emptyList(),
+                    searchedMovies = SearchResult.InitialValue,
                 ),
             )
         }

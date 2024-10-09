@@ -1,9 +1,8 @@
 package at.marki.moviedb.core.data.repository
 
 import at.marki.moviedb.core.datastore.PreferencesDataSource
-import at.marki.moviedb.core.datastore.User
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 
 class FavoritesRepository @Inject constructor(
@@ -15,6 +14,15 @@ class FavoritesRepository @Inject constructor(
 
     suspend fun setFavoriteIds(favoriteIds: List<Long>) {
         preferencesDataSource.setFavoriteIds(favoriteIds)
+    }
+
+    suspend fun toggleFavoriteId(id: Long) {
+        val isCurrentlyFavorite = preferencesDataSource.favoriteIdsFlow().first().contains(id)
+
+        when (isCurrentlyFavorite) {
+            true -> preferencesDataSource.removeFavoriteId(id)
+            false -> preferencesDataSource.addFavoriteId(id)
+        }
     }
 
     suspend fun addFavoriteId(favoriteId: Long) {

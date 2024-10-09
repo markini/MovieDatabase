@@ -2,6 +2,8 @@ package at.marki.moviedb.core.designsystems.theme
 
 import androidx.compose.ui.graphics.Color
 
+val favoriteColor = Color(0xFFE58109)
+
 val primaryLight = Color(0xFF5D5F5F)
 val onPrimaryLight = Color(0xFFFFFFFF)
 val primaryContainerLight = Color(0xFFFFFFFF)

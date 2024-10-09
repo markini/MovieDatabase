@@ -14,9 +14,11 @@ fun NavController.navigateToOverview(navOptions: NavOptions? = null) {
 }
 
 fun NavGraphBuilder.overviewScreen(
-    onNavigateToMovieDb: () -> Unit,
+    onNavigateToSearch: () -> Unit,
 ) {
     composable(route = OVERVIEW_ROUTE) {
-        OverviewRoute()
+        OverviewRoute(
+            onNavigateToSearch = onNavigateToSearch,
+        )
     }
 }

@@ -31,3 +31,7 @@ fun MovieWithCast.toModel(): Movie {
     val director = director.toModel()
     return movieEntity.toModel(director, cast)
 }
+
+fun List<MovieWithCast>.toModels(): List<Movie> {
+    return map { it.toModel() }
+}

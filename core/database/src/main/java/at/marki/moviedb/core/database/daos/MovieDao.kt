@@ -19,7 +19,7 @@ interface MovieDao {
 
     @Transaction
     @Query("SELECT * FROM movies WHERE id = :id")
-    suspend fun getMovieById(id: Long): MovieWithCast?
+    fun getMovieById(id: Long): Flow<MovieWithCast?>
 
     @Transaction
     @Query("SELECT * FROM movies WHERE id IN (:ids)")
@@ -28,4 +28,20 @@ interface MovieDao {
     @Transaction
     @Query("SELECT * FROM movies")
     fun getAllMovies(): Flow<List<MovieWithCast>>
+
+    @Query(
+        """
+            SELECT *
+            FROM movies
+            WHERE
+                title LIKE '%' || :query || '%' 
+            ORDER BY
+                CASE
+                    WHEN title LIKE :query || '%' THEN 1
+                    ELSE 2
+                END,
+                title
+        """
+    )
+    fun searchMovies(query: String): Flow<List<MovieWithCast>>
 }

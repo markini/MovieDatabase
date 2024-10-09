@@ -11,4 +11,8 @@ android {
 dependencies {
     implementation(projects.core.common)
     implementation(projects.core.designsystems)
+
+    implementation(projects.feature.details)
+
+    implementation(libs.coil.kt.compose)
 }

@@ -9,6 +9,8 @@ android {
 }
 
 dependencies {
+    implementation(projects.core.model)
+
     api(libs.androidx.compose.foundation)
     api(libs.androidx.compose.foundation.layout)
     api(libs.androidx.compose.material.iconsExtended)
@@ -17,4 +19,7 @@ dependencies {
     api(libs.androidx.compose.ui.tooling.preview)
     api(libs.androidx.compose.ui.util)
     api(libs.androidx.lifecycle.viewmodel.compose)
+
+    implementation(libs.coil.kt.compose)
+    implementation(libs.kotlinx.datetime)
 }
