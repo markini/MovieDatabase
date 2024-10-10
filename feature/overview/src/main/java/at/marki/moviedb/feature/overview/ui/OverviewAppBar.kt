@@ -40,7 +40,10 @@ internal fun OverviewAppBar(
     Row(
         modifier = modifier
             .fillMaxWidth()
-            .padding(horizontal = LocalHorizontalContentPadding.current),
+            .padding(
+                start = LocalHorizontalContentPadding.current,
+                end = 20.dp,
+            ),
         verticalAlignment = Alignment.CenterVertically,
     ) {
         User(

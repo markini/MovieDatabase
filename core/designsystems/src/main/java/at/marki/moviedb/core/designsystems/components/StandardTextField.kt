@@ -36,6 +36,7 @@ fun StandardTextField(
     onTextChanged: (String) -> Unit,
     modifier: Modifier = Modifier,
     onDoneClicked: (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
 ) {
     val hasDoneAction = onDoneClicked != null
     var valueText by remember(value) { mutableStateOf(value) }
@@ -54,6 +55,7 @@ fun StandardTextField(
                 maxLines = 1,
             )
         },
+        leadingIcon = leadingIcon,
         keyboardOptions = KeyboardOptions.Default.copy(
             keyboardType = KeyboardType.Text,
             imeAction = when (hasDoneAction) {

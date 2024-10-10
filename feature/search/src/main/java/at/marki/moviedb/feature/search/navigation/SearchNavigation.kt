@@ -16,9 +16,11 @@ fun NavController.navigateToSearch(
 }
 
 fun NavGraphBuilder.searchScreen(
-    onNavigateToMovieDb: () -> Unit,
+    onBackClick: () -> Unit,
 ) {
     composable(route = SEARCH_ROUTE) {
-        SearchRoute()
+        SearchRoute(
+            onBackClick = onBackClick,
+        )
     }
 }

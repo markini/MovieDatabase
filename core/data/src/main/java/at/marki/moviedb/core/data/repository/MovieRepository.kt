@@ -72,7 +72,11 @@ class MovieRepository @Inject constructor(
                     .map { it.toModels() }
                     .map { movies ->
                         when {
-                            movies.isNotEmpty() -> SearchResult.Success(movies)
+                            movies.isNotEmpty() -> SearchResult.Success(
+                                query = searchQuery,
+                                searchedMovies = movies,
+                            )
+
                             else -> SearchResult.NotFound
                         }
                     }

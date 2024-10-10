@@ -10,6 +10,8 @@ import androidx.navigation.compose.NavHost
 import at.marki.moviedb.feature.overview.navigation.OVERVIEW_ROUTE
 import at.marki.moviedb.feature.overview.navigation.navigateToOverview
 import at.marki.moviedb.feature.overview.navigation.overviewScreen
+import at.marki.moviedb.feature.search.navigation.navigateToSearch
+import at.marki.moviedb.feature.search.navigation.searchScreen
 import at.marki.moviedb.feature.signup.navigation.SIGNUP_ROUTE
 import at.marki.moviedb.feature.signup.navigation.navigateToSignup
 import at.marki.moviedb.feature.signup.navigation.signupScreen
@@ -39,9 +41,12 @@ fun MovieDbNavHost(
         modifier = modifier,
     ) {
         signupScreen()
-        overviewScreen {
-
-        }
+        overviewScreen(
+            onNavigateToSearch = navController::navigateToSearch,
+        )
+        searchScreen(
+            onBackClick = navController::popBackStack,
+        )
     }
 }
 

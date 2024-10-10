@@ -5,6 +5,7 @@ import at.marki.moviedb.core.model.Movie
 sealed interface SearchResult {
     data object Loading : SearchResult
     data class Success(
+        val query: String,
         val searchedMovies: List<Movie>?,
     ) : SearchResult
 

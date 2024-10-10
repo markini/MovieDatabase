@@ -43,6 +43,7 @@ class SearchViewModel @Inject constructor(
             SearchViewModelUiState.Success(
                 allMovies = allMovies,
                 searchedMovies = searchResult,
+                query = (searchResult as? SearchResult.Success)?.query.orEmpty(),
             )
         }.debounce(
             DEFAULT_DEBOUNCE_TIME,
@@ -84,5 +85,6 @@ sealed interface SearchViewModelUiState {
     data class Success(
         val allMovies: List<Movie>,
         val searchedMovies: SearchResult,
+        val query: String,
     ) : SearchViewModelUiState
 }
