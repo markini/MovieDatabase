@@ -12,6 +12,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import at.marki.moviedb.core.designsystems.ThemePreviews
 import at.marki.moviedb.core.designsystems.components.LoadingState
 import at.marki.moviedb.core.designsystems.theme.AppTheme
+import at.marki.moviedb.feature.signup.ui.SignupForm
+import at.marki.moviedb.feature.signup.ui.SignupHeader
 
 @Composable
 fun SignupRoute(

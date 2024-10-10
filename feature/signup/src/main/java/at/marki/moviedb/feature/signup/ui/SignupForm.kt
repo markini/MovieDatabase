@@ -1,4 +1,4 @@
-package at.marki.moviedb.feature.signup
+package at.marki.moviedb.feature.signup.ui
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,7 +11,7 @@ import at.marki.moviedb.core.designsystems.components.EmailTextField
 import at.marki.moviedb.core.designsystems.components.PasswordTextField
 import at.marki.moviedb.core.designsystems.components.StandardTextField
 import at.marki.moviedb.core.designsystems.localCompositions.LocalHorizontalContentPadding
-import at.marki.moviedb.feature.signup.ui.SubmitButton
+import at.marki.moviedb.feature.signup.SignupViewModelUiState
 
 private const val DEFAULT_FORM_SPACING = 10
 

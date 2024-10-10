@@ -1,4 +1,4 @@
-package at.marki.moviedb.feature.overview
+package at.marki.moviedb.feature.overview.ui
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

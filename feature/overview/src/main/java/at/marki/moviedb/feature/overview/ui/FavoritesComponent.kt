@@ -1,5 +1,6 @@
-package at.marki.moviedb.feature.overview
+package at.marki.moviedb.feature.overview.ui
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -29,6 +30,7 @@ import coil.request.ImageRequest
 private const val POSTER_HEIGHT = 270
 private const val POSTER_WIDTH = 182
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 internal fun FavoritesComponent(
     favorites: List<Movie>,
@@ -40,11 +42,13 @@ internal fun FavoritesComponent(
         contentPadding = PaddingValues(horizontal = LocalHorizontalContentPadding.current),
         horizontalArrangement = Arrangement.spacedBy(20.dp),
     ) {
-        items(favorites) { movie ->
+        items(items = favorites, key = { it.id }) { movie ->
             FavoriteElement(
                 movie = movie,
                 onFavoriteClicked = onFavoriteClicked,
-                modifier = Modifier.shadow(12.dp, Shapes().medium),
+                modifier = Modifier
+                    .shadow(12.dp, Shapes().medium)
+                    .animateItemPlacement(),
             )
         }
     }
@@ -70,7 +74,7 @@ private fun FavoriteElement(
             .width(POSTER_WIDTH.dp)
             .clip(Shapes().medium)
             .clickable { onFavoriteClicked(movie.id) },
-        contentScale = ContentScale.Fit,
+        contentScale = ContentScale.FillBounds,
     )
 }
 
