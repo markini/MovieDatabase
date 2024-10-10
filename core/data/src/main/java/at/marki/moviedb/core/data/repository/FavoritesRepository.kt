@@ -3,6 +3,7 @@ package at.marki.moviedb.core.data.repository
 import at.marki.moviedb.core.datastore.PreferencesDataSource
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class FavoritesRepository @Inject constructor(
@@ -23,6 +24,10 @@ class FavoritesRepository @Inject constructor(
             true -> preferencesDataSource.removeFavoriteId(id)
             false -> preferencesDataSource.addFavoriteId(id)
         }
+    }
+
+    fun isFavoriteId(id: Long): Flow<Boolean> {
+        return preferencesDataSource.favoriteIdsFlow().map { it.contains(id) }
     }
 
     suspend fun addFavoriteId(favoriteId: Long) {

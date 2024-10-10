@@ -37,6 +37,8 @@ import at.marki.moviedb.core.designsystems.components.MovieListElement
 import at.marki.moviedb.core.designsystems.localCompositions.LocalHorizontalContentPadding
 import at.marki.moviedb.core.designsystems.theme.AppTheme
 import at.marki.moviedb.feature.details.DetailsBottomSheet
+import at.marki.moviedb.feature.overview.ui.FavoritesComponent
+import at.marki.moviedb.feature.overview.ui.OverviewAppBar
 
 @Composable
 fun OverviewRoute(
@@ -88,7 +90,7 @@ fun OverviewScreen(
     if (isDetailsBottomSheetVisible) {
         DetailsBottomSheet(
             onDismissRequest = { isDetailsBottomSheetVisible = false },
-            movieId = 0,
+            movieId = selectedMovieId,
         )
     }
 }

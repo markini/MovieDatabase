@@ -11,4 +11,7 @@ android {
 dependencies {
     implementation(projects.core.common)
     implementation(projects.core.designsystems)
+
+    implementation(libs.coil.kt.compose)
+    implementation(libs.kotlinx.datetime)
 }

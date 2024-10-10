@@ -18,9 +18,10 @@ private const val MAX_RATING = 5
 private const val STAR_SIZE = 10
 
 @Composable
-internal fun RatingStarsRow(
+fun RatingStarsRow(
     rating: Int,
     modifier: Modifier = Modifier,
+    starSize: Int = STAR_SIZE,
 ) {
     Row(
         modifier = modifier,
@@ -32,7 +33,7 @@ internal fun RatingStarsRow(
 
             RatingStar(
                 isSelected = isSelected,
-                modifier = Modifier.size(STAR_SIZE.dp),
+                modifier = Modifier.size(starSize.dp),
             )
         }
     }
