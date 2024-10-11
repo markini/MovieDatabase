@@ -27,7 +27,6 @@ class MainActivityViewModel @Inject constructor(
 ) : ViewModel(), DefaultLifecycleObserver {
 
     companion object {
-        private const val TAG = "MainActivityViewModel"
         private val DEFAULT_DEBOUNCE_TIME = 600.milliseconds
     }
 

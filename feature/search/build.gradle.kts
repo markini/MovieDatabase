@@ -11,4 +11,6 @@ android {
 dependencies {
     implementation(projects.core.common)
     implementation(projects.core.designsystems)
+
+    implementation(projects.feature.details)
 }

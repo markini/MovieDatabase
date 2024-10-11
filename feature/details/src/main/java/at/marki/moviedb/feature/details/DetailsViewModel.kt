@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import at.marki.moviedb.core.data.repository.FavoritesRepository
 import at.marki.moviedb.core.data.repository.MovieRepository
-import at.marki.moviedb.core.data.repository.UserRepository
 import at.marki.moviedb.core.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -22,13 +21,11 @@ import kotlin.time.Duration.Companion.milliseconds
 @HiltViewModel
 class DetailsViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val userRepository: UserRepository,
     private val favoritesRepository: FavoritesRepository,
     private val movieRepository: MovieRepository,
 ) : ViewModel() {
 
     companion object {
-        private const val TAG = "DetailsViewModel"
         private val DEFAULT_DEBOUNCE_TIME = 200.milliseconds
     }
 

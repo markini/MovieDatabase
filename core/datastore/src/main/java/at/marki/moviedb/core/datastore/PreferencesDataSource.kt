@@ -16,14 +16,6 @@ import javax.inject.Inject
 class PreferencesDataSource @Inject constructor(
     private val userPreferences: DataStore<Preferences>,
 ) {
-    suspend fun setLastAppVersion(lastAppVersion: String) = setPreference(
-        key = PreferenceItems.lastVersionItem.key,
-        value = lastAppVersion,
-    )
-
-    fun lastAppVersion(): Flow<String?> =
-        getPreferenceFlow(PreferenceItems.lastVersionItem.key)
-
     fun user() = getPreferenceFlow(PreferenceItems.user.key)
         .map { value ->
             when (value) {
@@ -65,10 +57,8 @@ class PreferencesDataSource @Inject constructor(
         }
     }
 
-    suspend fun favoritesIds() =
-        JsonUtils.decodeJson<List<String>>(getPreference(PreferenceItems.favoriteIdsItem.key))
-            ?.map { it.toLong() }
-            ?: PreferenceItems.favoriteIdsItem.defaultValue.map { it.toLong() }
+    private suspend fun favoritesIds() = favoriteIdsFlow().firstOrNull()
+        ?: PreferenceItems.favoriteIdsItem.defaultValue.map { it.toLong() }
 
     fun favoriteIdsFlow() = getPreferenceFlow(PreferenceItems.favoriteIdsItem.key)
         .map { favoritesIds ->

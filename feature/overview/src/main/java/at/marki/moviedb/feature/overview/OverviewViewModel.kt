@@ -22,12 +22,11 @@ import kotlin.time.Duration.Companion.milliseconds
 class OverviewViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
     private val favoritesRepository: FavoritesRepository,
-    private val movieRepository: MovieRepository,
+    movieRepository: MovieRepository,
     private val userRepository: UserRepository,
 ) : ViewModel() {
 
     companion object {
-        private const val TAG = "OverviewViewModel"
         private val DEFAULT_DEBOUNCE_TIME = 200.milliseconds
 
         private val STAFF_RECOMMENDATION_IDS = listOf(530915L, 186L, 77L, 246741L, 475557L)

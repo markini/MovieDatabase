@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import at.marki.moviedb.core.data.model.SearchResult
+import at.marki.moviedb.core.data.repository.FavoritesRepository
 import at.marki.moviedb.core.data.repository.MovieRepository
 import at.marki.moviedb.core.model.Movie
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,11 +24,11 @@ import kotlin.time.Duration.Companion.milliseconds
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
+    private val favoritesRepository: FavoritesRepository,
     private val movieRepository: MovieRepository,
 ) : ViewModel() {
 
     companion object {
-        private const val TAG = "SearchViewModel"
         private val DEFAULT_DEBOUNCE_TIME = 200.milliseconds
     }
 
@@ -39,8 +40,10 @@ class SearchViewModel @Inject constructor(
         combine(
             movieRepository.getAllMovies(),
             _searchResult,
-        ) { allMovies, searchResult ->
+            favoritesRepository.getFavoriteIds(),
+        ) { allMovies, searchResult, favoriteIds ->
             SearchViewModelUiState.Success(
+                favoriteIds = favoriteIds,
                 allMovies = allMovies,
                 searchedMovies = searchResult,
                 query = (searchResult as? SearchResult.Success)?.query.orEmpty(),
@@ -77,12 +80,17 @@ class SearchViewModel @Inject constructor(
         }
     }
 
-
+    fun toggleFavorite(movieId: Long) {
+        viewModelScope.launch {
+            favoritesRepository.toggleFavoriteId(movieId)
+        }
+    }
 }
 
 sealed interface SearchViewModelUiState {
     data object Loading : SearchViewModelUiState
     data class Success(
+        val favoriteIds: List<Long>,
         val allMovies: List<Movie>,
         val searchedMovies: SearchResult,
         val query: String,

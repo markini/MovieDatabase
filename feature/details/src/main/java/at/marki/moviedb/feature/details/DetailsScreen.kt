@@ -29,6 +29,12 @@ import at.marki.moviedb.feature.details.ui.DetailsText
 import at.marki.moviedb.feature.details.ui.KeyFacts
 import at.marki.moviedb.feature.details.ui.MovieHeadlineInformation
 
+/**
+ * Details Bottom Sheet. Shows details for a movie.
+ * Doesn't have a navigation. Should be shown in other screens.
+ *
+ * @param movieId The ID of the movie to show details for.
+ */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailsBottomSheet(

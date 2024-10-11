@@ -8,9 +8,6 @@ import coil.ImageLoaderFactory
 import coil.disk.DiskCache
 import coil.util.DebugLogger
 import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -23,13 +20,6 @@ class MovieDbApplication : Application(), ImageLoaderFactory {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        CoroutineScope(Dispatchers.IO).launch {
-            setLastAppVersion()
-        }
-    }
-
-    private suspend fun setLastAppVersion() {
-        userRepository.setLastAppVersion(BuildConfig.VERSION_CODE.toString())
     }
 
     override fun newImageLoader(): ImageLoader {

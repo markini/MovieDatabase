@@ -23,7 +23,6 @@ class SignupViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
-        private const val TAG = "SignupViewModel"
         private val DEFAULT_DEBOUNCE_TIME = 200.milliseconds
     }
 

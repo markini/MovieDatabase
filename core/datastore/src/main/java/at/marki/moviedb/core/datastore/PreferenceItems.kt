@@ -9,10 +9,7 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 object PreferenceItems {
 
     // ---------------------------------------------------------------------------------------------
-    // General Keys
-    val lastVersionItem by lazy {
-        StringPreferenceItem(key = stringPreferencesKey("key_last_app_version"), defaultValue = "")
-    }
+    // User Keys
 
     val user by lazy {
         createJsonPreferenceItem(
@@ -23,6 +20,7 @@ object PreferenceItems {
 
     // ---------------------------------------------------------------------------------------------
     // Favorites Keys
+
     val favoriteIdsItem by lazy {
         createJsonPreferenceItem(
             key = stringPreferencesKey("key_favorites"),
