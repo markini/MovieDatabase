@@ -28,7 +28,7 @@ object PreferenceItems {
         )
     }
 
-    inline fun <reified T : Enum<T>> createEnumPreferenceItem(
+    private inline fun <reified T : Enum<T>> createEnumPreferenceItem(
         key: Preferences.Key<String>,
         defaultValue: T,
     ) = EnumPreferenceItem(
@@ -37,7 +37,7 @@ object PreferenceItems {
         enumClass = T::class.java,
     )
 
-    inline fun <reified T> createJsonPreferenceItem(
+    private inline fun <reified T> createJsonPreferenceItem(
         key: Preferences.Key<String>,
         defaultValue: T,
     ) = JsonPreferenceItem(
