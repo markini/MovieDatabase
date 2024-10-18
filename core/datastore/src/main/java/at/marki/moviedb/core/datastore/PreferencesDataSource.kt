@@ -92,13 +92,6 @@ class PreferencesDataSource @Inject constructor(
         }
     }
 
-    private suspend fun <T> getPreference(key: Preferences.Key<T>): T? = try {
-        getPreferenceFlow(key).firstOrNull()
-    } catch (exception: Exception) {
-        Timber.e(exception, "Could not retrieve boolean preference")
-        null
-    }
-
     private fun <T> getPreferenceFlow(key: Preferences.Key<T>): Flow<T?> = try {
         userPreferences.data.map { preferences ->
             preferences[key]
@@ -125,9 +118,6 @@ class PreferencesDataSource @Inject constructor(
                     else -> value
                 }
             }
-
-    private suspend fun getLongPreference(longPreferenceItem: LongPreferenceItem) =
-        getLongPreferenceFlow(longPreferenceItem).firstOrNull() ?: longPreferenceItem.defaultValue
 
     private fun getLongPreferenceFlow(longPreferenceItem: LongPreferenceItem) =
         getPreferenceFlow(longPreferenceItem.key)
