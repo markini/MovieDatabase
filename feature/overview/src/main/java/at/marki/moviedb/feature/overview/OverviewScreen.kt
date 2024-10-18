@@ -89,7 +89,7 @@ fun OverviewScreen(
 
     if (isDetailsBottomSheetVisible) {
         DetailsBottomSheet(
-            onDismissRequest = { isDetailsBottomSheetVisible = false },
+            onDismissBottomSheet = { isDetailsBottomSheetVisible = false },
             movieId = selectedMovieId,
         )
     }

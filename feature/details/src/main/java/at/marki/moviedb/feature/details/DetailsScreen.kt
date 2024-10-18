@@ -10,6 +10,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -28,6 +29,7 @@ import at.marki.moviedb.feature.details.ui.DetailsPoster
 import at.marki.moviedb.feature.details.ui.DetailsText
 import at.marki.moviedb.feature.details.ui.KeyFacts
 import at.marki.moviedb.feature.details.ui.MovieHeadlineInformation
+import kotlinx.coroutines.launch
 
 /**
  * Details Bottom Sheet. Shows details for a movie.
@@ -39,7 +41,7 @@ import at.marki.moviedb.feature.details.ui.MovieHeadlineInformation
 @Composable
 fun DetailsBottomSheet(
     movieId: Long,
-    onDismissRequest: () -> Unit,
+    onDismissBottomSheet: () -> Unit,
     modifier: Modifier = Modifier,
     viewModel: DetailsViewModel = hiltViewModel(),
 ) {
@@ -47,11 +49,12 @@ fun DetailsBottomSheet(
 
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val uiStateValue = viewModel.uiState.collectAsStateWithLifecycle()
+    val scope = rememberCoroutineScope()
 
     ModalBottomSheet(
         sheetState = sheetState,
         modifier = modifier.fillMaxSize(),
-        onDismissRequest = onDismissRequest,
+        onDismissRequest = onDismissBottomSheet,
         scrimColor = Color.Transparent,
         containerColor = MaterialTheme.colorScheme.background,
         contentColor = MaterialTheme.colorScheme.onBackground,
@@ -61,7 +64,12 @@ fun DetailsBottomSheet(
             uiState = uiStateValue.value,
             modifier = modifier,
             onToggleFavorite = { viewModel.toggleFavorite() },
-            onDismiss = onDismissRequest,
+            onDismiss = {
+                scope.launch {
+                    sheetState.hide()
+                    onDismissBottomSheet()
+                }
+            },
         )
     }
 }
