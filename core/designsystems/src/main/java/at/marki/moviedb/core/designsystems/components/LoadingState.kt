@@ -7,6 +7,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 
+/**
+ * Default full size LoadingState.
+ */
 @Composable
 fun LoadingState(
     modifier: Modifier = Modifier,

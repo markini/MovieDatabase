@@ -69,6 +69,10 @@ private fun NavigateToOverviewIfUserIsLoggedIn(
     }
 }
 
+/**
+ * Automatically navigates to the signup screen if the user is not logged in
+ * (and not already on the signup screen).
+ */
 @Composable
 private fun NavigateToSignUpIfUserIsLoggedOut(
     isUserLoggedIn: Boolean,

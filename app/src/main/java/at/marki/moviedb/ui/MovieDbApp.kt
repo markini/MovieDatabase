@@ -11,6 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.dp
+import at.marki.moviedb.core.designsystems.localCompositions.LocalHorizontalContentPadding
 import at.marki.moviedb.core.designsystems.localCompositions.LocalThemeIsDark
 import at.marki.moviedb.navigation.MovieDbNavHost
 
@@ -21,6 +23,7 @@ fun MovieDbApp(
 ) {
     CompositionLocalProvider(
         LocalThemeIsDark provides isSystemInDarkTheme(),
+        LocalHorizontalContentPadding provides 30.dp,
     ) {
         Surface {
             Scaffold(

@@ -47,7 +47,7 @@ class MainActivityViewModel @Inject constructor(
             DEFAULT_DEBOUNCE_TIME,
         ).stateIn(
             scope = viewModelScope,
-            started = SharingStarted.WhileSubscribed(5000),
+            started = SharingStarted.Eagerly,
             initialValue = MainActivityUiState.Loading,
         )
 
