@@ -14,11 +14,6 @@ class AndroidFeatureConventionPlugin : Plugin<Project> {
                 apply("moviedb.android.hilt")
                 apply("androidx.navigation.safeargs.kotlin")
             }
-            extensions.configure<LibraryExtension> {
-                defaultConfig {
-                    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-                }
-            }
 
             val libs = extensions.getByType<VersionCatalogsExtension>().named("libs")
 

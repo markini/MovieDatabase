@@ -63,9 +63,6 @@ dependencies {
 
     implementation(libs.coil.kt)
 
-    implementation(libs.android.inappupdate)
-    implementation(libs.semver4j)
-
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.datetime)
     implementation(libs.kotlinx.serialization.json)
@@ -94,16 +91,6 @@ dependencies {
 
     implementation(libs.hilt.ext.work)
     ksp(libs.hilt.ext.compiler)
-
-    implementation(platform(libs.firebase.bom))
-    implementation(libs.firebase.config)
-    implementation(libs.firebase.messaging)
-    implementation(libs.amplitude.sdk)
-
-
-    implementation(libs.slf4j.api)
-
-    implementation(libs.retrofit.core)
 }
 
 kapt {
