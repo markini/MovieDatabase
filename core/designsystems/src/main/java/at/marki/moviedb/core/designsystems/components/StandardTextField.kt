@@ -16,6 +16,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import at.marki.moviedb.core.designsystems.ThemePreviews
@@ -62,6 +63,7 @@ fun StandardTextField(
                 true -> ImeAction.Done
                 false -> ImeAction.None
             },
+            capitalization = KeyboardCapitalization.Sentences,
         ),
         keyboardActions = KeyboardActions(
             onDone = { onDoneClicked?.invoke() },
