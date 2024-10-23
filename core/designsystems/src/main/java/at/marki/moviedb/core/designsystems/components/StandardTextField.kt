@@ -44,7 +44,7 @@ fun StandardTextField(
     OutlinedTextField(
         value = valueText,
         onValueChange = { newValue ->
-            valueText = newValue.trim()
+            valueText = newValue
             onTextChanged(valueText)
         },
         label = {
