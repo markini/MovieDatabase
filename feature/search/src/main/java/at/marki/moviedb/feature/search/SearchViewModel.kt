@@ -29,7 +29,7 @@ class SearchViewModel @Inject constructor(
 ) : ViewModel() {
 
     companion object {
-        private val DEFAULT_DEBOUNCE_TIME = 200.milliseconds
+        private val DEFAULT_DEBOUNCE_TIME = 100.milliseconds
     }
 
     private val _query = MutableSharedFlow<String>()
@@ -71,11 +71,6 @@ class SearchViewModel @Inject constructor(
 
     fun searchMovies(query: String) {
         viewModelScope.launch {
-            if (query.isBlank()) {
-                _searchResult.emit(SearchResult.InitialValue)
-                return@launch
-            }
-
             _query.emit(query.trim())
         }
     }

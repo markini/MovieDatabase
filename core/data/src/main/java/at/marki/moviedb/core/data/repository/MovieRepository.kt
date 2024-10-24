@@ -9,9 +9,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.flatMapLatest
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
+import kotlin.time.Duration
 import kotlin.time.Duration.Companion.milliseconds
 
 class MovieRepository @Inject constructor(
@@ -60,13 +61,14 @@ class MovieRepository @Inject constructor(
             }
     }
 
-    fun searchMovies(query: SharedFlow<String>) = query
-        .debounce(100.milliseconds)
+    fun searchMovies(
+        query: SharedFlow<String>,
+        debounceDuration: Duration = 100.milliseconds,
+    ) = query
+        .debounce(debounceDuration)
         .flatMapLatest { searchQuery ->
             if (searchQuery.isBlank()) {
-                flow {
-                    SearchResult.InitialValue
-                }
+                flowOf(SearchResult.InitialValue)
             } else {
                 movieDao.searchMovies(searchQuery)
                     .map { it.toModels() }
