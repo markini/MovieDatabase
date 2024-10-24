@@ -29,6 +29,7 @@ interface MovieDao {
     @Query("SELECT * FROM movies")
     fun getAllMovies(): Flow<List<MovieWithCast>>
 
+    @Transaction
     @Query(
         """
             SELECT *
