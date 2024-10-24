@@ -54,7 +54,10 @@ fun DetailsBottomSheet(
     ModalBottomSheet(
         sheetState = sheetState,
         modifier = modifier.fillMaxSize(),
-        onDismissRequest = onDismissBottomSheet,
+        onDismissRequest = {
+            viewModel.resetUiState()
+            onDismissBottomSheet()
+        },
         scrimColor = Color.Transparent,
         containerColor = MaterialTheme.colorScheme.background,
         contentColor = MaterialTheme.colorScheme.onBackground,
@@ -67,6 +70,7 @@ fun DetailsBottomSheet(
             onDismiss = {
                 scope.launch {
                     sheetState.hide()
+                    viewModel.resetUiState()
                     onDismissBottomSheet()
                 }
             },
