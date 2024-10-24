@@ -16,6 +16,7 @@ import javax.inject.Inject
 class PreferencesDataSource @Inject constructor(
     private val userPreferences: DataStore<Preferences>,
 ) {
+    //REVIEW: would rather expect a method name like getUser
     fun user() = getPreferenceFlow(PreferenceItems.user.key)
         .map { value ->
             when (value) {

@@ -44,6 +44,8 @@ fun StandardTextField(
     OutlinedTextField(
         value = valueText,
         onValueChange = { newValue ->
+            //REVIEW: the trim here prevents you from entering spaces
+            // in the search and there are movie titles with spaces in them
             valueText = newValue.trim()
             onTextChanged(valueText)
         },

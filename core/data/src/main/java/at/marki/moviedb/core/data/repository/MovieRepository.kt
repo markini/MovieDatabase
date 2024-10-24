@@ -32,6 +32,8 @@ class MovieRepository @Inject constructor(
         return favoritesRepository
             .getFavoriteIds()
             .flatMapLatest { favoriteIds ->
+                //REVIEW: why not call getMovies(favoriteIds) here instead of
+                // copy-pasting?
                 movieDao
                     .getMoviesByIds(favoriteIds)
                     .map { movies ->
@@ -60,10 +62,14 @@ class MovieRepository @Inject constructor(
             }
     }
 
+    //REVIEW: this seems to be a very weird way to handle the search for me
+    // i would rather expect the debounce to happen in ui and forward the requests to the repository
+    // and not pass a flow as a parameter
     fun searchMovies(query: SharedFlow<String>) = query
         .debounce(100.milliseconds)
         .flatMapLatest { searchQuery ->
             if (searchQuery.isBlank()) {
+                //REVIEW: you forgot to emit here. alternatively you could have used flowOf(SearchResult.InitialValue)
                 flow {
                     SearchResult.InitialValue
                 }

@@ -36,6 +36,7 @@ private const val POSTER_WIDTH = 60
 @Composable
 fun MovieListElement(
     isFavorite: Boolean,
+    //REVIEW: would have expected some reduced ui model here
     movie: Movie,
     onToggleFavorite: (movieId: Long) -> Unit,
     modifier: Modifier = Modifier,

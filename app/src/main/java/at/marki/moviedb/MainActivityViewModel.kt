@@ -21,7 +21,10 @@ import kotlin.time.Duration.Companion.milliseconds
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
+    //REVIEW: why no use case for the login state?
     userRepository: UserRepository,
+    //REVIEW: not sure if the viewmodel should be aware of the initialization of the database
+    // nor if it should be responsible for initializing it
     private val isDatabaseInitializedUseCase: IsDatabaseInitializedUseCase,
     private val initializeDatabaseUseCase: InitializeDatabaseUseCase,
 ) : ViewModel(), DefaultLifecycleObserver {

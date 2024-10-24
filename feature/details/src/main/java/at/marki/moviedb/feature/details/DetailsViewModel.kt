@@ -45,6 +45,9 @@ class DetailsViewModel @Inject constructor(
                     )
                 }
             }
+        //REVIEW: the debounce here actually makes it a bit worse,
+        // as the bottomsheet will still show the data it was showing before
+        // during the debounce time and skip the loading state
         }.debounce(
             DEFAULT_DEBOUNCE_TIME,
         ).stateIn(

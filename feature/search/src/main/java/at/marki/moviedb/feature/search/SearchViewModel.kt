@@ -71,6 +71,11 @@ class SearchViewModel @Inject constructor(
 
     fun searchMovies(query: String) {
         viewModelScope.launch {
+            //REVIEW: this causes a race condition when you quickly
+            // delete a lot of characters in your search
+            // as the search performed through _query is not done yet, i assume?
+            // try to type "what" in the search and then delete all characters by longpressing
+            // on backspace
             if (query.isBlank()) {
                 _searchResult.emit(SearchResult.InitialValue)
                 return@launch

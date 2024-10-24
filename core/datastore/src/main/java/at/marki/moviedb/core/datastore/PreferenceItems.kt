@@ -22,6 +22,8 @@ object PreferenceItems {
     // Favorites Keys
 
     val favoriteIdsItem by lazy {
+        //REVIEW: instead of parsing the list of ids to json you could have
+        // used a stringSetPreferencesKey
         createJsonPreferenceItem(
             key = stringPreferencesKey("key_favorites"),
             defaultValue = emptyList<String>()

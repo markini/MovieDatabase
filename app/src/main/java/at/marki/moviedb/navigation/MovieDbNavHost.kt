@@ -80,6 +80,8 @@ private fun NavigateToSignUpIfUserIsLoggedOut(
 ) {
     LaunchedEffect(isUserLoggedIn) {
         if (!isUserLoggedIn) {
+            //REVIEW: i guess you could move the "if" into navigateToSignup
+            // so you don't need to reference a feature specific constant here
             if (navController.currentDestination?.route != SIGNUP_ROUTE) {
                 val navOptions = NavOptions.Builder()
                     .setPopUpTo(SIGNUP_ROUTE, true)
